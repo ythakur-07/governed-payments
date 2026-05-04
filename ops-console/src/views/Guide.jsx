@@ -1,68 +1,136 @@
-import { FiDatabase, FiGitBranch, FiCheckCircle, FiSearch, FiSliders } from "react-icons/fi";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { FiDatabase, FiGitBranch, FiCheckCircle, FiSearch, FiSliders, FiChevronDown, FiChevronRight } from "react-icons/fi";
 
-const VIEWS = [
+function Expandable({ title, children }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      className="rounded-md border mt-3"
+      style={{ backgroundColor: "var(--panel-2)", borderColor: "var(--border)" }}
+    >
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-left"
+        style={{ color: "var(--accent)" }}
+      >
+        {open ? <FiChevronDown size={14} /> : <FiChevronRight size={14} />}
+        {title}
+      </button>
+      {open && (
+        <div className="px-3 pb-3 text-xs leading-relaxed" style={{ color: "var(--muted)" }}>
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
+const STEPS = [
   {
+    number: 1,
+    icon: FiDatabase,
+    title: "Seed the Demo Data",
+    whatToDo: (
+      <>
+        Click the <strong>"Seed demos"</strong> button in the top-right corner of the header.
+      </>
+    ),
+    whatHappens:
+      "Three payment requests are submitted to the system simultaneously. Each follows a different path based on the governance rules:",
+    outcomes: [
+      { label: "$350 purchase", result: "Passes validation, pauses for your approval", color: "var(--warn)" },
+      { label: "$600 purchase", result: "Blocked automatically \u2014 exceeds the $500 budget", color: "var(--danger)" },
+      { label: "$200 purchase", result: "Rejected instantly \u2014 the agent's access was revoked", color: "var(--danger)" },
+    ],
+    deeper: null,
+  },
+  {
+    number: 2,
     icon: FiGitBranch,
-    title: "Trust Graph",
-    route: "/",
-    color: "var(--accent-2)",
-    description:
-      "Visualizes the full delegation chain from the Root Authorization Service down through Principals, Parent Agents, Sub-Agents, and their Tools. Each delegation token displays an authority bar showing how much of its spend limit has been consumed (spent vs. spend_limit). Revoked tokens appear in red.",
-    tryIt:
-      "After seeding, observe the hierarchy. Notice how tok_agent_001 has a $500 limit and tok_agent_002 is marked REVOKED.",
+    title: "See the Chain of Trust",
+    nav: { label: "Trust Graph", to: "/trust" },
+    whatToDo: (
+      <>
+        Click <strong>"Trust Graph"</strong> in the sidebar.
+      </>
+    ),
+    whatHappens:
+      "You'll see a hierarchy showing who authorized whom. At the top is the Root Authorization Service \u2014 think of it as the company's finance department. Below it are the agents that have been granted permission to spend.",
+    lookFor: [
+      "The authority bars show how much spending power each agent has left (like a budget meter)",
+      "One token is marked REVOKED in red \u2014 that agent's access has been cut off",
+      "Each level in the tree represents a delegation of authority: the root trusts the principal, who trusts the agent",
+    ],
+    deeper: {
+      title: "What are delegation tokens?",
+      content: "A delegation token is like a corporate credit card with built-in limits. It specifies: who can spend (the agent), how much they can spend (spend limit), which merchants they can pay (allowlist), and how deep they can delegate to sub-agents. Unlike a credit card, tokens can be revoked instantly and the revocation takes effect system-wide.",
+    },
   },
   {
+    number: 3,
     icon: FiCheckCircle,
-    title: "Approval Queue",
-    route: "/approve",
-    color: "var(--warn)",
-    description:
-      "Shows all tasks paused at the awaiting_approval state. When a payment exceeds the approval threshold ($250), the workflow halts and waits for an operator to explicitly approve it. Approval re-validates release policy before resuming.",
-    tryIt:
-      'Enter an operator name (or keep "ops_admin") and click Approve on the $350 task. Watch it progress through releasing, settlement, and reconciliation.',
+    title: "Approve a Payment",
+    nav: { label: "Approval Queue", to: "/approve" },
+    whatToDo: (
+      <>
+        Click <strong>"Approval Queue"</strong> in the sidebar. You'll see the $350 payment waiting for your decision.
+      </>
+    ),
+    whatHappens:
+      "This payment is paused because $350 exceeds the $250 auto-approval threshold. The system is asking you, the human operator: \"This amount is significant \u2014 should we proceed?\"",
+    action: (
+      <>
+        Click <strong>"Approve"</strong> and watch the payment complete. Behind the scenes, the system re-validates the policy one more time, releases the funds, settles the transaction, and begins reconciliation.
+      </>
+    ),
+    deeper: {
+      title: "Why does the system pause here?",
+      content: "The approval threshold ($250) is a configurable rule in the Control Plane. Any payment above this amount requires explicit human sign-off. The system doesn't bypass you or make the call on its own \u2014 it waits. This is the \"human-in-the-loop\" pattern: AI handles the routine work, humans make the high-stakes decisions. The approval (or rejection) is recorded in the provenance log as evidence.",
+    },
   },
   {
+    number: 4,
     icon: FiSearch,
-    title: "Task Explorer",
-    route: "/explorer",
-    color: "var(--accent)",
-    description:
-      "A two-panel inspector. The left panel lists all tasks with their current state. Select any task to see its full snapshot from context_memory (amount, merchant, wallets, token, liability owner) plus the append-only provenance log showing every state transition, policy decision, capability result, and delegation record.",
-    tryIt:
-      "Click on different tasks to compare outcomes. Expand the \"raw\" toggle on any provenance record to see the full evidence payload.",
+    title: "Inspect the Evidence Trail",
+    nav: { label: "Task Explorer", to: "/explorer" },
+    whatToDo: (
+      <>
+        Click <strong>"Task Explorer"</strong> in the sidebar. Select each of the three tasks on the left to compare their outcomes.
+      </>
+    ),
+    whatHappens: "Each task tells a different story through its state and evidence trail:",
+    outcomes: [
+      { label: "$350 task", result: "Full lifecycle: approved \u2192 released \u2192 settled \u2192 reconciled", color: "var(--success)" },
+      { label: "$600 task", result: "Failed at validation \u2014 policy blocked it for exceeding spend limit", color: "var(--danger)" },
+      { label: "$200 task", result: "Failed immediately \u2014 the delegation token was revoked", color: "var(--danger)" },
+    ],
+    deeper: {
+      title: "What's in the provenance log?",
+      content: "The provenance log is an append-only record of everything that happened to a task. Each entry shows: what happened (state transition, policy decision, or delegation), who did it (an agent, the system, or a human), and when. Click \"raw\" on any entry to see the full data. Nothing in this log can be edited or deleted \u2014 it's designed to be tamper-evident, like a receipt you can't throw away.",
+    },
   },
   {
+    number: 5,
     icon: FiSliders,
-    title: "Control Plane",
-    route: "/control-plane",
-    color: "var(--accent-2)",
-    description:
-      "The system's read-only configuration registry. Shows rail controls (max amount, approval threshold, supported currencies, timeouts), the capabilities registry (what each rail can do, side effects, idempotency), and the agents registry (who can do what).",
-    tryIt:
-      "Toggle the kill switch to ACTIVE \u2014 this blocks all new payment intake. Disable it to resume. This demonstrates the control plane's system-wide authority.",
-  },
-];
-
-const CONCEPTS = [
-  {
-    title: "Delegation Tokens (Article 3 / MDP)",
-    description:
-      "Authority flows via delegation tokens from Root \u2192 Principal \u2192 Agent \u2192 Sub-Agent. Each token carries a spend_limit, tracks spent amount, restricts currencies, and limits delegation depth. Tokens can be revoked instantly, cutting off all downstream authority.",
-  },
-  {
-    title: "State Machine",
-    description:
-      "Every payment follows a deterministic state machine: received \u2192 awaiting_validation \u2192 awaiting_approval \u2192 approved \u2192 releasing \u2192 settlement_pending \u2192 settled \u2192 pending_reconcile. Tasks can transition to failed or exception from any state. Each transition is recorded in provenance.",
-  },
-  {
-    title: "Append-Only Provenance",
-    description:
-      "Every action is recorded immutably \u2014 state transitions, policy decisions, capability results, and delegations. Nothing is overwritten or deleted. This creates a complete audit trail that proves exactly what happened, when, and why.",
-  },
-  {
-    title: "Deterministic Policy",
-    description:
-      "The policy engine makes binary decisions based on rules \u2014 no probabilistic reasoning, no AI judgment calls. It checks token validity, spend limits, merchant allowlists, currency restrictions, and beneficiary status. Policy outcomes are recorded as provenance artifacts.",
+    title: "See the System Controls",
+    nav: { label: "Control Plane", to: "/control-plane" },
+    whatToDo: (
+      <>
+        Click <strong>"Control Plane"</strong> in the sidebar.
+      </>
+    ),
+    whatHappens:
+      "This is the central configuration that governs everything. You'll see the rules: maximum payment amount ($1,000), approval threshold ($250), supported currencies, and timeout settings. You'll also see which agents and capabilities are registered in the system.",
+    action: (
+      <>
+        <strong>Try the kill switch:</strong> Toggle it to ACTIVE. This is the emergency stop \u2014 it blocks all new payments system-wide. Toggle it back off to resume. In a real system, this is the red button you'd press if something went wrong.
+      </>
+    ),
+    deeper: {
+      title: "Who controls the Control Plane?",
+      content: "In this prototype, the Control Plane is configured at startup. In a production system, it would be managed by platform administrators \u2014 not by the AI agents themselves. Agents read from the Control Plane (to know their limits) but can never write to it. This separation ensures that an agent can't raise its own spending limit or grant itself new permissions.",
+    },
   },
 ];
 
@@ -72,129 +140,150 @@ export default function Guide() {
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-xl font-semibold" style={{ color: "var(--text)" }}>
-          How to Use the Operator Console
+          Step-by-Step Guide
         </h2>
         <p className="text-sm mt-2 leading-relaxed" style={{ color: "var(--muted)" }}>
-          The Governed Payments Operator Console gives you real-time visibility and control over
-          an AI-governed agentic payment system. It surfaces the delegation chain, approval workflows,
-          task lifecycle, and system configuration \u2014 everything an operator needs to monitor,
-          approve, and audit autonomous payment actions.
+          Follow these five steps to simulate three real payment scenarios and see AI governance
+          in action. The whole walkthrough takes about two minutes.
         </p>
       </div>
 
-      {/* Getting Started */}
-      <div
-        className="rounded-lg border p-5 mb-6"
-        style={{ backgroundColor: "var(--panel)", borderColor: "var(--border)" }}
-      >
-        <h3 className="text-[11px] uppercase tracking-wide font-medium mb-3" style={{ color: "var(--muted)" }}>
-          Getting Started
-        </h3>
-        <div className="flex items-start gap-4">
+      {/* Steps */}
+      <div className="space-y-5 mb-10">
+        {STEPS.map((step) => (
           <div
-            className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
-            style={{ backgroundColor: "var(--panel-2)", border: "1px solid var(--border)" }}
-          >
-            <FiDatabase size={18} style={{ color: "var(--accent)" }} />
-          </div>
-          <div>
-            <p className="text-sm font-medium" style={{ color: "var(--text)" }}>
-              Click "Seed demos" in the top-right header
-            </p>
-            <p className="text-sm mt-1 leading-relaxed" style={{ color: "var(--muted)" }}>
-              This submits three pre-built payment scenarios that demonstrate different outcomes:
-            </p>
-            <div className="mt-3 space-y-2">
-              <div className="flex items-center gap-3">
-                <span className="inline-block px-2 py-0.5 rounded-full text-[11px] font-semibold uppercase"
-                  style={{ color: "var(--warn)", border: "1px solid var(--warn)" }}>
-                  $350
-                </span>
-                <span className="text-sm" style={{ color: "var(--text)" }}>
-                  Happy path \u2014 passes validation, pauses at awaiting_approval for your sign-off
-                </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="inline-block px-2 py-0.5 rounded-full text-[11px] font-semibold uppercase"
-                  style={{ color: "var(--danger)", border: "1px solid var(--danger)" }}>
-                  $600
-                </span>
-                <span className="text-sm" style={{ color: "var(--text)" }}>
-                  Authority violation \u2014 exceeds the token's $500 spend limit, blocked by policy
-                </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="inline-block px-2 py-0.5 rounded-full text-[11px] font-semibold uppercase"
-                  style={{ color: "var(--danger)", border: "1px solid var(--danger)" }}>
-                  $200
-                </span>
-                <span className="text-sm" style={{ color: "var(--text)" }}>
-                  Revoked token \u2014 uses a revoked delegation token, rejected immediately
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* View Walkthroughs */}
-      <h3
-        className="text-[11px] uppercase tracking-wide font-medium mb-4 px-1"
-        style={{ color: "var(--muted)" }}
-      >
-        Console Views
-      </h3>
-
-      <div className="space-y-4 mb-8">
-        {VIEWS.map((v) => (
-          <div
-            key={v.route}
+            key={step.number}
             className="rounded-lg border p-5"
             style={{ backgroundColor: "var(--panel)", borderColor: "var(--border)" }}
           >
-            <div className="flex items-center gap-3 mb-3">
-              <v.icon size={18} style={{ color: v.color }} />
-              <h4 className="text-sm font-semibold" style={{ color: "var(--text)" }}>
-                {v.title}
-              </h4>
+            {/* Step header */}
+            <div className="flex items-center gap-3 mb-4">
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
+                style={{ background: "linear-gradient(135deg, var(--accent), var(--accent-2))", color: "#042b27" }}
+              >
+                {step.number}
+              </div>
+              <div className="flex items-center gap-2">
+                <step.icon size={16} style={{ color: "var(--accent)" }} />
+                <h3 className="text-base font-semibold" style={{ color: "var(--text)" }}>
+                  {step.title}
+                </h3>
+              </div>
+              {step.nav && (
+                <Link
+                  to={step.nav.to}
+                  className="ml-auto text-xs font-medium px-2.5 py-1 rounded-md transition-all hover:opacity-80"
+                  style={{ backgroundColor: "var(--panel-2)", color: "var(--accent)", border: "1px solid var(--border)" }}
+                >
+                  Open {step.nav.label} &rarr;
+                </Link>
+              )}
             </div>
-            <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-              {v.description}
-            </p>
-            <div
-              className="mt-3 px-3 py-2 rounded-md text-sm"
-              style={{ backgroundColor: "var(--panel-2)", border: "1px solid var(--border)" }}
-            >
-              <span className="font-medium" style={{ color: "var(--accent)" }}>Try it: </span>
-              <span style={{ color: "var(--text)" }}>{v.tryIt}</span>
+
+            {/* What to do */}
+            <div className="mb-3">
+              <div className="text-[11px] uppercase tracking-wide font-medium mb-1" style={{ color: "var(--accent-2)" }}>
+                What to do
+              </div>
+              <p className="text-sm" style={{ color: "var(--text)" }}>{step.whatToDo}</p>
             </div>
+
+            {/* What happens */}
+            <div className="mb-1">
+              <div className="text-[11px] uppercase tracking-wide font-medium mb-1" style={{ color: "var(--warn)" }}>
+                What happens
+              </div>
+              <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>{step.whatHappens}</p>
+            </div>
+
+            {/* Outcomes list */}
+            {step.outcomes && (
+              <div className="mt-2 space-y-1.5">
+                {step.outcomes.map((o) => (
+                  <div key={o.label} className="flex items-start gap-2.5 text-sm">
+                    <span
+                      className="inline-block px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase shrink-0 mt-0.5"
+                      style={{ color: o.color, border: `1px solid ${o.color}` }}
+                    >
+                      {o.label}
+                    </span>
+                    <span style={{ color: "var(--text)" }}>{o.result}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Look for */}
+            {step.lookFor && (
+              <div className="mt-3">
+                <div className="text-[11px] uppercase tracking-wide font-medium mb-1.5" style={{ color: "var(--muted)" }}>
+                  What to look for
+                </div>
+                <ul className="space-y-1">
+                  {step.lookFor.map((item, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm" style={{ color: "var(--text)" }}>
+                      <span style={{ color: "var(--accent)" }}>&#8250;</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Action */}
+            {step.action && (
+              <div
+                className="mt-3 rounded-md px-3 py-2.5 text-sm"
+                style={{ backgroundColor: "rgba(94, 234, 212, 0.06)", border: "1px solid rgba(94, 234, 212, 0.15)" }}
+              >
+                {step.action}
+              </div>
+            )}
+
+            {/* Expandable deeper section */}
+            {step.deeper && (
+              <Expandable title={step.deeper.title}>
+                {step.deeper.content}
+              </Expandable>
+            )}
           </div>
         ))}
       </div>
 
-      {/* Key Concepts */}
-      <h3
-        className="text-[11px] uppercase tracking-wide font-medium mb-4 px-1"
-        style={{ color: "var(--muted)" }}
+      {/* What Just Happened */}
+      <div
+        className="rounded-lg border p-6 mb-6"
+        style={{ backgroundColor: "var(--panel)", borderColor: "var(--accent)", borderWidth: "1px" }}
       >
-        Key Concepts
-      </h3>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {CONCEPTS.map((c) => (
-          <div
-            key={c.title}
-            className="rounded-lg border p-4"
-            style={{ backgroundColor: "var(--panel)", borderColor: "var(--border)" }}
-          >
-            <h4 className="text-sm font-semibold mb-2" style={{ color: "var(--text)" }}>
-              {c.title}
-            </h4>
-            <p className="text-xs leading-relaxed" style={{ color: "var(--muted)" }}>
-              {c.description}
-            </p>
-          </div>
-        ))}
+        <h3 className="text-base font-semibold mb-3" style={{ color: "var(--text)" }}>
+          What Just Happened?
+        </h3>
+        <p className="text-sm leading-relaxed mb-3" style={{ color: "var(--muted)" }}>
+          You just watched three payments flow through an AI-governed system. Each one hit a different
+          governance boundary:
+        </p>
+        <ul className="space-y-2 text-sm" style={{ color: "var(--text)" }}>
+          <li className="flex items-start gap-2">
+            <span style={{ color: "var(--success)" }}>&#10003;</span>
+            The $350 payment was <strong>within budget but significant</strong> \u2014 so the system
+            asked a human to approve it before releasing funds.
+          </li>
+          <li className="flex items-start gap-2">
+            <span style={{ color: "var(--danger)" }}>&#10007;</span>
+            The $600 payment <strong>exceeded the agent's spending limit</strong> \u2014 the policy
+            engine blocked it automatically, no human needed.
+          </li>
+          <li className="flex items-start gap-2">
+            <span style={{ color: "var(--danger)" }}>&#10007;</span>
+            The $200 payment used a <strong>revoked access token</strong> \u2014 the agent's authority
+            had been cut off, and the system enforced it instantly.
+          </li>
+        </ul>
+        <p className="text-sm leading-relaxed mt-3" style={{ color: "var(--muted)" }}>
+          Together, these scenarios demonstrate the core principle: AI agents can operate autonomously
+          within clear boundaries, but governance ensures they can never overstep.
+        </p>
       </div>
     </div>
   );

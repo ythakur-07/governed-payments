@@ -1,16 +1,30 @@
 import { NavLink } from "react-router-dom";
-import { FiGitBranch, FiCheckCircle, FiSearch, FiSliders, FiBookOpen, FiLayers } from "react-icons/fi";
+import { FiHome, FiBookOpen, FiGitBranch, FiCheckCircle, FiSearch, FiSliders, FiLayers, FiList } from "react-icons/fi";
 
-const CONSOLE_ITEMS = [
-  { to: "/",              label: "Trust Graph",    icon: FiGitBranch },
-  { to: "/approve",       label: "Approval Queue", icon: FiCheckCircle },
-  { to: "/explorer",      label: "Task Explorer",  icon: FiSearch },
-  { to: "/control-plane", label: "Control Plane",  icon: FiSliders },
-];
-
-const DOC_ITEMS = [
-  { to: "/guide",         label: "Guide",          icon: FiBookOpen },
-  { to: "/architecture",  label: "Architecture",   icon: FiLayers },
+const SECTIONS = [
+  {
+    label: "Start Here",
+    items: [
+      { to: "/",       label: "Home",   icon: FiHome },
+      { to: "/guide",  label: "Guide",  icon: FiBookOpen },
+    ],
+  },
+  {
+    label: "Simulate",
+    items: [
+      { to: "/trust",         label: "Trust Graph",    icon: FiGitBranch },
+      { to: "/approve",       label: "Approval Queue", icon: FiCheckCircle },
+      { to: "/explorer",      label: "Task Explorer",  icon: FiSearch },
+      { to: "/control-plane", label: "Control Plane",  icon: FiSliders },
+    ],
+  },
+  {
+    label: "Learn More",
+    items: [
+      { to: "/architecture", label: "Architecture", icon: FiLayers },
+      { to: "/glossary",     label: "Glossary",     icon: FiList },
+    ],
+  },
 ];
 
 function NavItem({ to, label, icon: Icon }) {
@@ -38,29 +52,21 @@ function NavItem({ to, label, icon: Icon }) {
 export default function Sidebar() {
   return (
     <aside
-      className="hidden md:flex w-56 flex-col gap-1 py-4 px-3 border-r shrink-0"
+      className="hidden md:flex w-56 flex-col gap-1 py-4 px-3 border-r shrink-0 overflow-auto"
       style={{ backgroundColor: "var(--panel)", borderColor: "var(--border)" }}
     >
-      <div
-        className="text-[11px] uppercase tracking-widest font-medium mb-3 px-3"
-        style={{ color: "var(--muted)" }}
-      >
-        Console
-      </div>
-
-      {CONSOLE_ITEMS.map((item) => (
-        <NavItem key={item.to} {...item} />
-      ))}
-
-      <div
-        className="text-[11px] uppercase tracking-widest font-medium mt-5 mb-3 px-3"
-        style={{ color: "var(--muted)" }}
-      >
-        Documentation
-      </div>
-
-      {DOC_ITEMS.map((item) => (
-        <NavItem key={item.to} {...item} />
+      {SECTIONS.map((section, i) => (
+        <div key={section.label} className={i > 0 ? "mt-4" : ""}>
+          <div
+            className="text-[11px] uppercase tracking-widest font-medium mb-2 px-3"
+            style={{ color: "var(--muted)" }}
+          >
+            {section.label}
+          </div>
+          {section.items.map((item) => (
+            <NavItem key={item.to} {...item} />
+          ))}
+        </div>
       ))}
     </aside>
   );

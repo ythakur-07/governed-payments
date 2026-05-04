@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header.jsx";
 import Sidebar from "./components/Sidebar.jsx";
+import Landing from "./views/Landing.jsx";
+import Guide from "./views/Guide.jsx";
 import TrustGraph from "./views/TrustGraph.jsx";
 import ApprovalQueue from "./views/ApprovalQueue.jsx";
 import TaskExplorer from "./views/TaskExplorer.jsx";
 import ControlPlaneSummary from "./views/ControlPlaneSummary.jsx";
-import Guide from "./views/Guide.jsx";
 import Architecture from "./views/Architecture.jsx";
+import Glossary from "./views/Glossary.jsx";
 
 export default function App() {
   const [error, setError] = useState(null);
@@ -39,12 +41,14 @@ export default function App() {
           )}
 
           <Routes>
-            <Route path="/" element={<TrustGraph />} />
+            <Route path="/" element={<Landing />} />
+            <Route path="/guide" element={<Guide />} />
+            <Route path="/trust" element={<TrustGraph />} />
             <Route path="/approve" element={<ApprovalQueue />} />
             <Route path="/explorer" element={<TaskExplorer />} />
             <Route path="/control-plane" element={<ControlPlaneSummary />} />
-            <Route path="/guide" element={<Guide />} />
             <Route path="/architecture" element={<Architecture />} />
+            <Route path="/glossary" element={<Glossary />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
