@@ -20,6 +20,12 @@ export const api = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ active }),
     }).then(json),
+  updateRailControls: (data) =>
+    fetch(`${BASE}/api/control-plane/rail-controls`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }).then(json),
 
   tokens:     () => fetch(`${BASE}/api/tokens`).then(json),
   trustGraph: () => fetch(`${BASE}/api/trust-graph`).then(json),

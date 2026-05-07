@@ -40,8 +40,8 @@ const STEPS = [
       "Three payment requests are submitted to the system simultaneously. Each follows a different path based on the governance rules:",
     outcomes: [
       { label: "$350 purchase", result: "Passes validation, pauses for your approval", color: "var(--warn)" },
-      { label: "$600 purchase", result: "Blocked automatically \u2014 exceeds the $500 budget", color: "var(--danger)" },
-      { label: "$200 purchase", result: "Rejected instantly \u2014 the agent's access was revoked", color: "var(--danger)" },
+      { label: "$600 purchase", result: "Blocked automatically — exceeds the $500 budget", color: "var(--danger)" },
+      { label: "$200 purchase", result: "Rejected instantly — the agent's access was revoked", color: "var(--danger)" },
     ],
     deeper: null,
   },
@@ -56,10 +56,10 @@ const STEPS = [
       </>
     ),
     whatHappens:
-      "You'll see a hierarchy showing who authorized whom. At the top is the Root Authorization Service \u2014 think of it as the company's finance department. Below it are the agents that have been granted permission to spend.",
+      "You'll see a hierarchy showing who authorized whom. At the top is the Root Authorization Service — think of it as the company's finance department. Below it are the agents that have been granted permission to spend.",
     lookFor: [
       "The authority bars show how much spending power each agent has left (like a budget meter)",
-      "One token is marked REVOKED in red \u2014 that agent's access has been cut off",
+      "One token is marked REVOKED in red — that agent's access has been cut off",
       "Each level in the tree represents a delegation of authority: the root trusts the principal, who trusts the agent",
     ],
     deeper: {
@@ -78,7 +78,7 @@ const STEPS = [
       </>
     ),
     whatHappens:
-      "This payment is paused because $350 exceeds the $250 auto-approval threshold. The system is asking you, the human operator: \"This amount is significant \u2014 should we proceed?\"",
+      "This payment is paused because $350 exceeds the $250 auto-approval threshold. The system is asking you, the human operator: \"This amount is significant — should we proceed?\"",
     action: (
       <>
         Click <strong>"Approve"</strong> and watch the payment complete. Behind the scenes, the system re-validates the policy one more time, releases the funds, settles the transaction, and begins reconciliation.
@@ -86,7 +86,7 @@ const STEPS = [
     ),
     deeper: {
       title: "Why does the system pause here?",
-      content: "The approval threshold ($250) is a configurable rule in the Control Plane. Any payment above this amount requires explicit human sign-off. The system doesn't bypass you or make the call on its own \u2014 it waits. This is the \"human-in-the-loop\" pattern: AI handles the routine work, humans make the high-stakes decisions. The approval (or rejection) is recorded in the provenance log as evidence.",
+      content: "The approval threshold ($250) is a configurable rule in the Control Plane. Any payment above this amount requires explicit human sign-off. The system doesn't bypass you or make the call on its own — it waits. This is the \"human-in-the-loop\" pattern: AI handles the routine work, humans make the high-stakes decisions. The approval (or rejection) is recorded in the provenance log as evidence.",
     },
   },
   {
@@ -102,12 +102,12 @@ const STEPS = [
     whatHappens: "Each task tells a different story through its state and evidence trail:",
     outcomes: [
       { label: "$350 task", result: "Full lifecycle: approved \u2192 released \u2192 settled \u2192 reconciled", color: "var(--success)" },
-      { label: "$600 task", result: "Failed at validation \u2014 policy blocked it for exceeding spend limit", color: "var(--danger)" },
-      { label: "$200 task", result: "Failed immediately \u2014 the delegation token was revoked", color: "var(--danger)" },
+      { label: "$600 task", result: "Failed at validation — policy blocked it for exceeding spend limit", color: "var(--danger)" },
+      { label: "$200 task", result: "Failed immediately — the delegation token was revoked", color: "var(--danger)" },
     ],
     deeper: {
       title: "What's in the provenance log?",
-      content: "The provenance log is an append-only record of everything that happened to a task. Each entry shows: what happened (state transition, policy decision, or delegation), who did it (an agent, the system, or a human), and when. Click \"raw\" on any entry to see the full data. Nothing in this log can be edited or deleted \u2014 it's designed to be tamper-evident, like a receipt you can't throw away.",
+      content: "The provenance log is an append-only record of everything that happened to a task. Each entry shows: what happened (state transition, policy decision, or delegation), who did it (an agent, the system, or a human), and when. Click \"raw\" on any entry to see the full data. Nothing in this log can be edited or deleted — it's designed to be tamper-evident, like a receipt you can't throw away.",
     },
   },
   {
@@ -124,19 +124,19 @@ const STEPS = [
       "This is the central configuration that governs everything. You'll see the rules: maximum payment amount ($1,000), approval threshold ($250), supported currencies, and timeout settings. You'll also see which agents and capabilities are registered in the system.",
     action: (
       <>
-        <strong>Try the kill switch:</strong> Toggle it to ACTIVE. This is the emergency stop \u2014 it blocks all new payments system-wide. Toggle it back off to resume. In a real system, this is the red button you'd press if something went wrong.
+        <strong>Try the kill switch:</strong> Toggle it to ACTIVE. This is the emergency stop — it blocks all new payments system-wide. Toggle it back off to resume. In a real system, this is the red button you'd press if something went wrong.
       </>
     ),
     deeper: {
       title: "Who controls the Control Plane?",
-      content: "In this prototype, the Control Plane is configured at startup. In a production system, it would be managed by platform administrators \u2014 not by the AI agents themselves. Agents read from the Control Plane (to know their limits) but can never write to it. This separation ensures that an agent can't raise its own spending limit or grant itself new permissions.",
+      content: "In this prototype, the Control Plane is configured at startup. In a production system, it would be managed by platform administrators — not by the AI agents themselves. Agents read from the Control Plane (to know their limits) but can never write to it. This separation ensures that an agent can't raise its own spending limit or grant itself new permissions.",
     },
   },
 ];
 
 export default function Guide() {
   return (
-    <div className="max-w-4xl">
+    <div className="max-w-6xl">
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-xl font-semibold" style={{ color: "var(--text)" }}>
@@ -265,19 +265,16 @@ export default function Guide() {
         </p>
         <ul className="space-y-2 text-sm" style={{ color: "var(--text)" }}>
           <li className="flex items-start gap-2">
-            <span style={{ color: "var(--success)" }}>&#10003;</span>
-            The $350 payment was <strong>within budget but significant</strong> \u2014 so the system
-            asked a human to approve it before releasing funds.
+            <span className="shrink-0 mt-0.5" style={{ color: "var(--success)" }}>&#10003;</span>
+            <span>The $350 payment was <strong>within budget but significant</strong> — so the system asked a human to approve it before releasing funds.</span>
           </li>
           <li className="flex items-start gap-2">
-            <span style={{ color: "var(--danger)" }}>&#10007;</span>
-            The $600 payment <strong>exceeded the agent's spending limit</strong> \u2014 the policy
-            engine blocked it automatically, no human needed.
+            <span className="shrink-0 mt-0.5" style={{ color: "var(--danger)" }}>&#10007;</span>
+            <span>The $600 payment <strong>exceeded the agent's spending limit</strong> — the policy engine blocked it automatically, no human needed.</span>
           </li>
           <li className="flex items-start gap-2">
-            <span style={{ color: "var(--danger)" }}>&#10007;</span>
-            The $200 payment used a <strong>revoked access token</strong> \u2014 the agent's authority
-            had been cut off, and the system enforced it instantly.
+            <span className="shrink-0 mt-0.5" style={{ color: "var(--danger)" }}>&#10007;</span>
+            <span>The $200 payment used a <strong>revoked access token</strong> — the agent's authority had been cut off, and the system enforced it instantly.</span>
           </li>
         </ul>
         <p className="text-sm leading-relaxed mt-3" style={{ color: "var(--muted)" }}>

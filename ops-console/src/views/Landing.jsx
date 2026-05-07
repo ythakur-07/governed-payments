@@ -21,9 +21,9 @@ const SCENARIOS = [
     outcome: "Blocked by policy",
     outcomeColor: "var(--danger)",
     story:
-      "The same agent tries to buy $600 of supplies \u2014 but its budget only allows $500 total. The policy engine catches this instantly and blocks the payment. No human intervention needed. The rules are clear, and they\u2019re enforced automatically.",
-    agentDecides: "Nothing \u2014 the system blocks it before the agent can act",
-    humanDecides: "Nothing needed \u2014 the spending limit is enforced automatically",
+      "The same agent tries to buy $600 of supplies — but its budget only allows $500 total. The policy engine catches this instantly and blocks the payment. No human intervention needed. The rules are clear, and they\u2019re enforced automatically.",
+    agentDecides: "Nothing — the system blocks it before the agent can act",
+    humanDecides: "Nothing needed — the spending limit is enforced automatically",
     takeaway: "Hard spending limits prevent runaway AI spending, even if the agent \"wants\" to proceed.",
   },
   {
@@ -33,8 +33,8 @@ const SCENARIOS = [
     outcome: "Rejected instantly",
     outcomeColor: "var(--danger)",
     story:
-      "An agent tries to make a perfectly reasonable $200 purchase, but its access has been revoked \u2014 perhaps the agent was decommissioned, or a security concern was raised. The payment is rejected instantly, before any money moves.",
-    agentDecides: "Nothing \u2014 rejected before any action is taken",
+      "An agent tries to make a perfectly reasonable $200 purchase, but its access has been revoked — perhaps the agent was decommissioned, or a security concern was raised. The payment is rejected instantly, before any money moves.",
+    agentDecides: "Nothing — rejected before any action is taken",
     humanDecides: "The revocation was a prior human decision that propagates automatically",
     takeaway: "You can cut off an AI agent\u2019s authority instantly, and it takes effect system-wide.",
   },
@@ -49,12 +49,12 @@ const TAKEAWAYS = [
   {
     icon: FiEye,
     title: "Every Action is Recorded",
-    description: "An immutable audit trail captures every decision, every state change, every approval \u2014 who did what, when, and why.",
+    description: "An immutable audit trail captures every decision, every state change, every approval — who did what, when, and why.",
   },
   {
     icon: FiUserCheck,
     title: "Humans Stay in the Loop",
-    description: "High-value decisions automatically pause for human review. The system doesn\u2019t bypass you \u2014 it waits.",
+    description: "High-value decisions automatically pause for human review. The system doesn\u2019t bypass you — it waits.",
   },
   {
     icon: FiXOctagon,
@@ -65,14 +65,14 @@ const TAKEAWAYS = [
 
 export default function Landing() {
   return (
-    <div className="max-w-4xl">
+    <div className="max-w-6xl">
       {/* Hero */}
       <div className="mb-10">
         <h1 className="text-2xl md:text-3xl font-bold leading-tight" style={{ color: "var(--text)" }}>
           What Happens When AI Agents Handle Money?
         </h1>
-        <p className="text-base mt-4 leading-relaxed max-w-2xl" style={{ color: "var(--muted)" }}>
-          This prototype shows how autonomous AI agents can make payments \u2014 and what governance
+        <p className="text-base mt-4 leading-relaxed" style={{ color: "var(--muted)" }}>
+          This prototype shows how autonomous AI agents can make payments — and what governance
           keeps them in check. Explore three real scenarios to see authorization in action.
         </p>
       </div>
@@ -86,7 +86,7 @@ export default function Landing() {
           The Problem
         </h2>
         <p className="text-sm leading-relaxed mb-3" style={{ color: "var(--muted)" }}>
-          AI agents are increasingly being trusted to take actions on behalf of humans \u2014
+          AI agents are increasingly being trusted to take actions on behalf of humans —
           including spending money. But unlike a human employee, an AI agent can operate at machine
           speed, 24/7, across thousands of transactions simultaneously.
         </p>

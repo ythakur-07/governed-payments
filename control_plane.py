@@ -75,47 +75,47 @@ class ControlPlane:
                     type="draft",
                     has_side_effect=False,
                     idempotent=True,
-                    description="Create a domestic payment draft instruction on the rail"
+                    description="Drafts a new payment instruction. No external calls; fully reversible before release."
                 ),
                 CapabilityDescriptor(
                     name="validate_beneficiary",
                     type="validation",
                     has_side_effect=False,
                     idempotent=True,
-                    description="Validate that the receiver wallet is eligible to receive funds"
+                    description="Checks that the receiving account is eligible to receive funds. Read-only; no money moves."
                 ),
                 CapabilityDescriptor(
                     name="release_payment",
                     type="execution",
                     has_side_effect=True,
                     idempotent=True,
-                    description="Release funds through the rail. Irreversible. Approval-gated."
+                    description="Executes the payment on the external rail. Irreversible once sent. Requires prior human approval."
                 ),
                 CapabilityDescriptor(
                     name="get_status",
                     type="inquiry",
                     has_side_effect=False,
                     idempotent=True,
-                    description="Query current payment status from the rail"
+                    description="Queries current payment status from the rail. Read-only inquiry; no side effects."
                 ),
             ],
             agents=[
                 AgentCard(
                     agent_id="agent.payment_orchestrator",
                     role="parent",
-                    description="Coordinates intake, policy checks, and workflow kickoff",
+                    description="Root coordinator — receives payment requests, validates against policy, and delegates work to specialist agents.",
                     actions=["submit", "resume", "get_task"]
                 ),
                 AgentCard(
                     agent_id="agent.compliance_screening",
                     role="delegated",
-                    description="Performs beneficiary validation — delegated scope only",
+                    description="Specialist — validates beneficiary accounts before any funds are moved. Delegated scope only.",
                     actions=["validate_beneficiary"]
                 ),
                 AgentCard(
                     agent_id="agent.approval_router",
                     role="delegated",
-                    description="Handles approval routing logic — delegated scope only",
+                    description="Specialist — routes payments above the approval threshold to the human operator queue. Delegated scope only.",
                     actions=["route_approval"]
                 ),
             ]
@@ -124,6 +124,20 @@ class ControlPlane:
     def snapshot(self) -> ControlPlaneSnapshot:
         """Return the current control-plane snapshot."""
         return self._snapshot
+
+    def update_rail_controls(self, **kwargs):
+        """Mutate rail controls in place. Unknown keys are ignored."""
+        r = self._snapshot.rail_controls
+        if "max_amount" in kwargs:
+            r.max_amount = float(kwargs["max_amount"])
+        if "approval_required_above" in kwargs:
+            r.approval_required_above = float(kwargs["approval_required_above"])
+        if "supported_currencies" in kwargs:
+            r.supported_currencies = list(kwargs["supported_currencies"])
+        if "idempotency_window_secs" in kwargs:
+            r.idempotency_window_secs = int(kwargs["idempotency_window_secs"])
+        if "release_timeout_secs" in kwargs:
+            r.release_timeout_secs = int(kwargs["release_timeout_secs"])
 
     def capabilities(self) -> list:
         return self._snapshot.capabilities

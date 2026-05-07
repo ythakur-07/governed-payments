@@ -187,6 +187,28 @@ class KillSwitchRequest(BaseModel):
     active: bool
 
 
+class RailControlsRequest(BaseModel):
+    max_amount:              Optional[float] = None
+    approval_required_above: Optional[float] = None
+    supported_currencies:    Optional[list]  = None
+    idempotency_window_secs: Optional[int]   = None
+    release_timeout_secs:    Optional[int]   = None
+
+
+@app.post("/api/control-plane/rail-controls")
+def update_rail_controls(req: RailControlsRequest):
+    """Operator-driven update of rail control thresholds."""
+    state["cp"].update_rail_controls(**{k: v for k, v in req.model_dump().items() if v is not None})
+    snap = state["cp"].snapshot()
+    return {
+        "max_amount":              snap.rail_controls.max_amount,
+        "approval_required_above": snap.rail_controls.approval_required_above,
+        "supported_currencies":    snap.rail_controls.supported_currencies,
+        "idempotency_window_secs": snap.rail_controls.idempotency_window_secs,
+        "release_timeout_secs":    snap.rail_controls.release_timeout_secs,
+    }
+
+
 @app.post("/api/control-plane/kill-switch")
 def set_kill_switch(req: KillSwitchRequest):
     """Operator-driven toggle. Mutates the live snapshot in place."""
@@ -379,6 +401,11 @@ def submit_payment(req: SubmitPaymentRequest):
 @app.post("/api/seed")
 def seed_demo():
     """Submit the three demo scenarios so the console has something to show."""
+    # Reset token spending so seeds are always repeatable
+    for tok in state["tokens"].values():
+        if not tok.revoked:
+            tok.spent = 0.0
+
     api = state["api"]
     submitted = []
 

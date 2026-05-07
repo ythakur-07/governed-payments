@@ -109,21 +109,22 @@ const PRINCIPLES = [
   },
 ];
 
-const MAPPING = [
-  { reference: "apps/control-plane", prototype: "control_plane.py" },
-  { reference: "apps/policy-engine", prototype: "policy_engine.py" },
-  { reference: "apps/orchestrator-api", prototype: "orchestrator.py + api_server.py" },
-  { reference: "apps/capability-gateway", prototype: "capability_gateway.py" },
-  { reference: "services/context-memory-service", prototype: "context_memory.py" },
-  { reference: "services/provenance-service", prototype: "provenance.py" },
-  { reference: "services/workflow-worker", prototype: "workflow_worker.py" },
-  { reference: "packages/shared-contracts", prototype: "models.py" },
-  { reference: "apps/operator-console (UI)", prototype: "ops-console/" },
+const COMPONENT_MAP = [
+  { component: "Control Plane",       file: "control_plane.py",  role: "Configuration authority, capability & agent registries, kill switch" },
+  { component: "Policy Engine",       file: "policy_engine.py",  role: "Deterministic spend-limit, currency, and revocation checks" },
+  { component: "Orchestrator",        file: "orchestrator.py",   role: "Payment intake, kill-switch gate, task creation, delegation" },
+  { component: "Capability Gateway",  file: "capability_gateway.py", role: "External rail wrappers — draft, validate, release, reconcile" },
+  { component: "Context Memory",      file: "context_memory.py", role: "Mutable per-task state snapshots and outbox publication" },
+  { component: "Provenance Service",  file: "provenance.py",     role: "Append-only evidence ledger — state transitions, decisions, delegations" },
+  { component: "Workflow Worker",     file: "workflow_worker.py",role: "State-machine executor driving each task from intake to settlement" },
+  { component: "Shared Contracts",    file: "models.py",         role: "Typed data models shared across all services" },
+  { component: "API Server",          file: "api_server.py",     role: "Thin FastAPI HTTP layer; no business logic" },
+  { component: "Operator Console",    file: "ops-console/",      role: "React/Vite frontend for operators — Trust Graph, Approval Queue, Task Explorer, Control Plane" },
 ];
 
 export default function Architecture() {
   return (
-    <div className="max-w-5xl">
+    <div className="max-w-7xl">
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-xl font-semibold" style={{ color: "var(--text)" }}>
@@ -209,7 +210,7 @@ export default function Architecture() {
         Service Boundaries
       </h3>
 
-      <div className="space-y-4 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
         {SERVICES.map((s) => (
           <div
             key={s.name}
@@ -282,36 +283,40 @@ export default function Architecture() {
         ))}
       </div>
 
-      {/* Architecture Mapping */}
+      {/* Component Map */}
       <div
         className="rounded-lg border p-5 mb-4"
         style={{ backgroundColor: "var(--panel)", borderColor: "var(--border)" }}
       >
-        <h3 className="text-[11px] uppercase tracking-wide font-medium mb-3" style={{ color: "var(--muted)" }}>
-          Architecture Mapping (vs nkhatu/control-architecture)
+        <h3 className="text-[11px] uppercase tracking-wide font-medium mb-1" style={{ color: "var(--muted)" }}>
+          Component Map
         </h3>
+        <p className="text-xs mb-3" style={{ color: "var(--muted)" }}>
+          Each service is a single Python file with one clearly defined responsibility.
+        </p>
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
             <thead>
               <tr>
-                <th className="text-left px-3 py-2 text-[11px] uppercase tracking-wide font-medium"
-                  style={{ color: "var(--muted)", borderBottom: "1px solid var(--border)" }}>
-                  Reference Repo
-                </th>
-                <th className="text-left px-3 py-2 text-[11px] uppercase tracking-wide font-medium"
-                  style={{ color: "var(--muted)", borderBottom: "1px solid var(--border)" }}>
-                  This Prototype
-                </th>
+                {["Component", "File", "Role"].map((h) => (
+                  <th key={h} className="text-left px-3 py-2 text-[11px] uppercase tracking-wide font-medium"
+                    style={{ color: "var(--muted)", borderBottom: "1px solid var(--border)" }}>
+                    {h}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              {MAPPING.map((m) => (
-                <tr key={m.reference} className="transition-colors hover:bg-[--panel-2]">
-                  <td className="px-3 py-2 font-mono text-sm" style={{ borderBottom: "1px solid var(--border)" }}>
-                    {m.reference}
+              {COMPONENT_MAP.map((m) => (
+                <tr key={m.component} className="transition-colors hover:bg-[--panel-2]">
+                  <td className="px-3 py-2 text-sm font-medium" style={{ color: "var(--text)", borderBottom: "1px solid var(--border)" }}>
+                    {m.component}
                   </td>
-                  <td className="px-3 py-2 font-mono text-sm" style={{ color: "var(--accent)", borderBottom: "1px solid var(--border)" }}>
-                    {m.prototype}
+                  <td className="px-3 py-2 font-mono text-xs" style={{ color: "var(--accent)", borderBottom: "1px solid var(--border)" }}>
+                    {m.file}
+                  </td>
+                  <td className="px-3 py-2 text-xs" style={{ color: "var(--muted)", borderBottom: "1px solid var(--border)" }}>
+                    {m.role}
                   </td>
                 </tr>
               ))}
