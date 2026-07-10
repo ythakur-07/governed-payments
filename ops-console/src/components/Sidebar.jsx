@@ -21,8 +21,8 @@ const SECTIONS = [
   {
     label: "Learn More",
     items: [
-      { to: "/architecture", label: "Architecture", icon: FiLayers },
-      { to: "/glossary",     label: "Glossary",     icon: FiList },
+      { to: "/implementation-notes", label: "Implementation Notes", icon: FiLayers },
+      { to: "/glossary",             label: "Glossary",             icon: FiList },
     ],
   },
 ];

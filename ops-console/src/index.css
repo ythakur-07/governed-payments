@@ -47,3 +47,91 @@ a:hover {
 html {
   scroll-behavior: smooth;
 }
+
+/* ------------------------------------------------------------------ */
+/* Governed Payments — light editorial site theme                      */
+/* Scoped to .gp-site so the dark operator console remains untouched.   */
+/* ------------------------------------------------------------------ */
+.gp-site {
+  --gp-bg:            #ffffff;
+  --gp-bg-subtle:     #f7f8fa;
+  --gp-bg-inset:      #f0f2f5;
+  --gp-panel:         #ffffff;
+  --gp-border:        #e6e8ec;
+  --gp-border-strong: #d3d7de;
+  --gp-text:          #16191f;
+  --gp-text-2:        #3b4149;
+  --gp-muted:         #6b7280;
+  --gp-faint:         #9aa1ac;
+  --gp-accent:        #0f766e;
+  --gp-accent-strong: #115e59;
+  --gp-accent-soft:   #e6f7f3;
+  --gp-success:       #15803d;
+  --gp-danger:        #b91c1c;
+  --gp-warn:          #b45309;
+
+  --gp-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --gp-sans:  Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --gp-mono:  ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  background-color: var(--gp-bg);
+  color: var(--gp-text);
+  font-family: var(--gp-sans);
+  min-height: 100%;
+}
+
+.gp-site h1,
+.gp-site h2,
+.gp-site h3,
+.gp-site h4 {
+  color: var(--gp-text);
+}
+
+/* Editorial serif display type for large headings */
+.gp-display {
+  font-family: var(--gp-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.08;
+}
+
+/* Small-caps section eyebrow */
+.gp-eyebrow {
+  font-family: var(--gp-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gp-accent);
+}
+
+/* Constrained reading measure (~70 characters) */
+.gp-prose {
+  max-width: 42rem;
+  color: var(--gp-text-2);
+  line-height: 1.7;
+}
+
+.gp-site a {
+  color: var(--gp-accent);
+}
+.gp-site a:hover {
+  color: var(--gp-accent-strong);
+}
+
+/* Flow arrows used in architecture / problem diagrams */
+.gp-flow-arrow {
+  color: var(--gp-faint);
+}
+
+@keyframes gp-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.gp-fade-in { animation: gp-fade-in 0.4s ease both; }
+
+/* Modal overlay */
+.gp-overlay {
+  background: rgba(22, 25, 31, 0.45);
+  backdrop-filter: blur(2px);
+}

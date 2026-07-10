@@ -1,0 +1,772 @@
+Governed Payments Website V2 - Product Requirements Document (PRD)
+
+Objective
+
+Redesign the Governed Payments website from an interactive prototype into the official home of the Governed Payments research initiative.
+
+The website should no longer feel like a product demo or portfolio project. Instead, it should establish Governed Payments as a credible industry framework for Agentic Commerce.
+
+The website must accomplish three primary goals:
+
+1. Educate visitors on why today’s payment infrastructure is insufficient for AI agents.
+2. Present the Governed Payments architecture as the proposed solution.
+3. Demonstrate the solution through an interactive reference implementation.
+
+The prototype should support the architecture—not be the homepage.
+
+⸻
+
+Target Audience
+
+Primary:
+
+* Product Leaders
+* Payment Architects
+* Engineering Leaders
+* AI Infrastructure Teams
+* Payments Strategy Teams
+* Fintech Executives
+
+Secondary:
+
+* Recruiters
+* Hiring Managers
+* PM Candidates
+* Students
+
+The website should NOT feel like a personal portfolio.
+
+It should feel closer to:
+
+* Stripe Documentation
+* AWS Builders Library
+* Anthropic Research
+* OpenAI Research
+* Google Engineering
+
+⸻
+
+Overall Website Information Architecture
+
+Home
+Vision
+Architecture
+Reference Implementation
+Research
+Resources
+About
+GitHub
+
+Navigation should remain sticky throughout the experience.
+
+⸻
+
+HOME PAGE
+
+The homepage should tell a story.
+
+Visitors should understand the problem before seeing the prototype.
+
+The information hierarchy should be:
+
+Problem
+↓
+Why Existing Payments Break
+↓
+Governed Payments Architecture
+↓
+Reference Implementation
+↓
+Research
+↓
+Resources
+↓
+About
+
+⸻
+
+SECTION 1 — HERO
+
+Goal
+
+Immediately answer:
+
+“What is Governed Payments?”
+
+Layout
+
+Large centered headline.
+
+Minimal background.
+
+No dashboard screenshots.
+
+No excessive animations.
+
+Content
+
+Headline
+
+Governed Payments
+
+Subheadline
+
+The Reference Architecture for Agentic Commerce
+
+Supporting Copy
+
+AI agents can browse, reason and make decisions.
+
+They still cannot safely spend money.
+
+Governed Payments introduces a governance layer that enables secure, auditable and policy-aware autonomous commerce.
+
+Primary CTA
+
+Read the Vision
+
+Secondary CTA
+
+Explore the Architecture
+
+Tertiary CTA
+
+Launch Reference Implementation
+
+The prototype should NOT be the first CTA.
+
+⸻
+
+SECTION 2 — THE PROBLEM
+
+Goal
+
+Explain why AI fundamentally changes payments.
+
+Use a side-by-side visual comparison.
+
+Left Column
+
+Today’s Commerce
+
+Human
+↓
+Wallet
+↓
+Network
+↓
+Issuer
+
+Right Column
+
+Agentic Commerce
+
+Merchant
+↓
+AI Agent
+↓
+???
+↓
+Wallet
+↓
+Network
+↓
+Issuer
+
+Below the comparison
+
+Headline
+
+“The Missing Layer is Governance”
+
+Supporting text
+
+AI agents introduce decisions that existing payment systems were never designed to evaluate.
+
+Governed Payments fills this architectural gap.
+
+⸻
+
+SECTION 3 — CORE CHALLENGES
+
+Goal
+
+Introduce the five architectural problems.
+
+Display five cards.
+
+Each card expands into a modal.
+
+Card 1
+
+Delegated Authority
+
+Subtitle
+
+Who gave the AI permission?
+
+⸻
+
+Card 2
+
+Intent Verification
+
+Subtitle
+
+Did the AI correctly understand the user?
+
+⸻
+
+Card 3
+
+Policy Evaluation
+
+Subtitle
+
+Is this purchase allowed?
+
+⸻
+
+Card 4
+
+Risk Assessment
+
+Subtitle
+
+Should this transaction proceed?
+
+⸻
+
+Card 5
+
+Auditability
+
+Subtitle
+
+Can every decision be reconstructed?
+
+Each modal should contain:
+
+* Problem
+* Why today’s systems fail
+* How Governed Payments solves it
+* Future research opportunities
+
+⸻
+
+SECTION 4 — REFERENCE ARCHITECTURE
+
+Goal
+
+This becomes the visual centerpiece of the website.
+
+Do NOT show screenshots.
+
+Instead show the architecture.
+
+Merchant
+↓
+Intent Engine
+↓
+Policy Engine
+↓
+Delegation Manager
+↓
+Risk Engine
+↓
+Payment Orchestrator
+↓
+Wallet
+↓
+Network
+↓
+Issuer
+
+Every component should be clickable.
+
+Each component should display:
+
+Purpose
+
+Responsibilities
+
+Inputs
+
+Outputs
+
+Example APIs
+
+Future standards
+
+Related research
+
+Hover interactions should highlight the complete request flow.
+
+⸻
+
+SECTION 5 — REFERENCE IMPLEMENTATION
+
+Rename the existing prototype.
+
+Current Name
+
+Demo
+
+Prototype
+
+Simulator
+
+Replace with
+
+Reference Implementation
+
+Above the launch button include:
+
+“This interactive reference implementation demonstrates how the Governed Payments Control Plane evaluates delegated authority, intent, policy, and risk before authorizing payments.”
+
+Primary Button
+
+Launch Reference Implementation
+
+⸻
+
+SECTION 6 — RESEARCH
+
+Purpose
+
+Provide structured access to all research.
+
+Display as cards.
+
+Architecture Whitepaper
+
+Medium Articles
+
+Technical Deep Dives
+
+Architecture Notes
+
+Standards
+
+Future RFCs
+
+Avoid chronological blog feeds.
+
+Organize by topic.
+
+⸻
+
+SECTION 7 — OPEN QUESTIONS
+
+Purpose
+
+Invite industry discussion.
+
+Display as expandable questions.
+
+Examples
+
+Should delegated authority be standardized?
+
+Should payment intent become a network primitive?
+
+Where should AI identity live?
+
+How should liability be assigned?
+
+Can payment policies become portable?
+
+Can payment governance become interoperable?
+
+Each question should allow linking to GitHub discussions.
+
+⸻
+
+SECTION 8 — ABOUT
+
+Keep this intentionally small.
+
+Content
+
+Governed Payments is an independent research initiative exploring governance models for Agentic Commerce.
+
+Created by
+
+Yash Thakur
+
+Group Product Manager at PayPal
+
+Independent research.
+
+Links
+
+Portfolio
+
+LinkedIn
+
+Medium
+
+GitHub
+
+Avoid resume-style content.
+
+The website is about the idea, not the author.
+
+⸻
+
+ARCHITECTURE PAGE
+
+Purpose
+
+Teach the framework in detail.
+
+Layout
+
+Introduction
+
+Architecture Diagram
+
+Component Details
+
+Sequence Diagrams
+
+Trust Boundaries
+
+Example Transaction Walkthrough
+
+Future Standards
+
+Open Questions
+
+Each component receives its own section.
+
+Example
+
+Intent Engine
+
+Purpose
+
+Inputs
+
+Outputs
+
+Responsibilities
+
+Example payloads
+
+Design considerations
+
+⸻
+
+REFERENCE IMPLEMENTATION PAGE
+
+Purpose
+
+Hands-on exploration.
+
+Before launching the application explain:
+
+Scenario
+
+Actors
+
+Merchant
+
+AI Agent
+
+Wallet
+
+Issuer
+
+Network
+
+Customer
+
+Explain what visitors should observe.
+
+Delegation
+
+Intent
+
+Policies
+
+Risk
+
+Audit
+
+Payment authorization
+
+⸻
+
+RESEARCH PAGE
+
+Purpose
+
+Central documentation hub.
+
+Organize into:
+
+Vision
+
+Whitepaper
+
+Articles
+
+Architecture Notes
+
+Diagrams
+
+Talks
+
+Standards
+
+No chronological feed.
+
+Knowledge should be organized by subject.
+
+⸻
+
+RESOURCES PAGE
+
+Purpose
+
+Downloads.
+
+Include
+
+Architecture PDF
+
+Diagrams
+
+Slide Deck
+
+Glossary
+
+Reference APIs
+
+Future Standards
+
+Version History
+
+⸻
+
+UX REQUIREMENTS
+
+Progressive Disclosure
+
+Never overwhelm visitors.
+
+Every page should follow
+
+Problem
+
+↓
+
+Solution
+
+↓
+
+Architecture
+
+↓
+
+Implementation
+
+↓
+
+Research
+
+⸻
+
+Reduce Dashboard Feel
+
+Current interface resembles an admin console.
+
+Target aesthetic
+
+Documentation
+
+Research
+
+Engineering
+
+Minimalism
+
+Increase whitespace.
+
+Reduce visual noise.
+
+⸻
+
+Consistent Cards
+
+Every information card should follow:
+
+Title
+
+One sentence
+
+Learn More →
+
+Avoid large paragraphs.
+
+⸻
+
+Interactive Architecture
+
+Hovering over architecture components should:
+
+Highlight dependencies
+
+Animate request flow
+
+Reveal connected systems
+
+Teach through interaction.
+
+⸻
+
+Standardized Terminology
+
+Use ONLY these terms:
+
+Reference Architecture
+
+Reference Implementation
+
+Governance Layer
+
+Control Plane
+
+Intent Engine
+
+Policy Engine
+
+Delegation Manager
+
+Avoid inconsistent labels such as:
+
+Demo
+
+Prototype
+
+Simulator
+
+Workflow
+
+Engine (unless referring to architecture)
+
+⸻
+
+Typography
+
+Maximum reading width ~70 characters.
+
+Large headings.
+
+Comfortable spacing.
+
+Documentation-first layout.
+
+⸻
+
+VISUAL DESIGN
+
+The visual language should resemble:
+
+Stripe Documentation
+
+Stripe Press
+
+AWS Builders Library
+
+OpenAI Research
+
+Anthropic Research
+
+Characteristics
+
+Minimal
+
+Professional
+
+Technical
+
+Modern
+
+Editorial
+
+Avoid making the homepage resemble a SaaS dashboard.
+
+⸻
+
+CONTENT STYLE GUIDE
+
+Avoid personal language.
+
+Do NOT write
+
+“I built…”
+
+“My project…”
+
+“My architecture…”
+
+Instead use
+
+“Governed Payments proposes…”
+
+“The architecture introduces…”
+
+“The control plane evaluates…”
+
+“The framework enables…”
+
+The website should read like an industry whitepaper.
+
+⸻
+
+PRIMARY CALLS TO ACTION
+
+Only three primary CTAs should exist.
+
+Read the Vision
+
+Explore the Architecture
+
+Launch the Reference Implementation
+
+Everything else should be secondary.
+
+⸻
+
+FUTURE EXPANSION
+
+The information architecture should support future additions including:
+
+* Whitepaper PDF
+* Interactive sequence diagrams
+* Architecture Decision Records (ADRs)
+* RFCs
+* Standards proposals
+* Talks
+* Videos
+* Community discussions
+* Version history
+* Release notes
+
+Design with extensibility in mind.
+
+⸻
+
+SUCCESS CRITERIA
+
+After spending five minutes on the website, a first-time visitor should understand:
+
+1. Existing payment systems were designed for humans, not AI agents.
+2. AI introduces new governance challenges including delegated authority, intent verification, policy enforcement, risk evaluation and auditability.
+3. Governed Payments proposes a Control Plane that solves these problems.
+4. The architecture is backed by research, documentation and a working reference implementation.
+5. Governed Payments is an ongoing research initiative rather than a one-off demo or portfolio project.
+
+The visitor should leave believing this is a serious contribution to the future of Agentic Commerce.
