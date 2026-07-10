@@ -945,3 +945,486 @@ After spending five minutes on the website, a first-time visitor should understa
 5. Governed Payments is an ongoing research initiative rather than a one-off demo or portfolio project.
 
 The visitor should leave believing this is a serious contribution to the future of Agentic Commerce.
+
+⸻
+⸻
+⸻
+
+Governed Payments Website PRD — Version 2.1
+
+Objective
+
+Version 2.0 successfully positions Governed Payments as a research initiative.
+
+Version 2.1 focuses on making the website an educational experience rather than a documentation website.
+
+The website should progressively teach visitors:
+
+1. Why AI changes payments.
+2. Why governance is the missing layer.
+3. How the Governed Payments architecture solves this.
+4. How the architecture works through an interactive reference implementation.
+5. Where the research is headed next.
+
+The overall experience should resemble a technical whitepaper brought to life.
+
+⸻
+
+NEW DESIGN PRINCIPLE
+
+Every page should answer ONE question.
+
+Home
+“What is Governed Payments?”
+
+Vision
+“Why does this problem exist?”
+
+Architecture
+“How does it work?”
+
+Reference Implementation
+“Show me.”
+
+Research
+“Teach me more.”
+
+Resources
+“Help me apply it.”
+
+Do not mix purposes.
+
+⸻
+
+NEW SECTION
+
+Guided Learning Journey
+
+Goal
+
+Reduce decision fatigue.
+
+First-time visitors should not have to decide where to begin.
+
+Add a persistent banner near the top of the homepage.
+
+Example
+
+⸻
+
+New to Governed Payments?
+
+Start here.
+
+① The Problem (1 min)
+↓
+② The Architecture (2 min)
+↓
+③ Reference Implementation (2 min)
+↓
+④ Continue Learning
+
+⸻
+
+Display this only until the user dismisses it.
+
+Remember dismissal using local storage.
+
+⸻
+
+UPDATE
+
+Architecture becomes the centerpiece
+
+The website should prioritize architecture diagrams over screenshots.
+
+The prototype should support the architecture—not replace it.
+
+Every major page should include at least one visual architecture diagram.
+
+Examples include:
+
+* Overall Control Plane
+* Trust Boundaries
+* Request Lifecycle
+* Decision Flow
+* Component Relationships
+
+Diagrams should be reusable across articles and presentations.
+
+⸻
+
+NEW REQUIREMENT
+
+Interactive Architecture Explorer
+
+Create a dedicated interactive architecture diagram.
+
+Each component should be individually clickable.
+
+Required components:
+
+Intent Engine
+Policy Engine
+Delegation Manager
+Risk Engine
+Payment Orchestrator
+Audit Engine
+Wallet
+Payment Network
+Issuer
+Merchant
+AI Agent
+
+Selecting a component opens a side panel containing:
+
+Purpose
+Responsibilities
+Inputs
+Outputs
+Example API payload
+Example decision
+Related research
+Future standards considerations
+
+Hovering over a component should animate incoming and outgoing data flows.
+
+⸻
+
+NEW SECTION
+
+Industry Use Cases
+
+Purpose
+
+Help visitors understand practical applications.
+
+Create dedicated pages for the following examples:
+
+Shopping Assistant
+Travel Booking Agent
+Expense Agent
+Procurement Agent
+Developer Agent
+Healthcare Scheduling Agent
+Financial Advisor
+
+Each page should explain:
+
+Problem
+How today’s payment flow behaves
+How Governed Payments changes the experience
+Architecture differences
+Future considerations
+
+Each use case should reuse the same architecture components.
+
+⸻
+
+NEW SECTION
+
+Industry Perspectives
+
+Purpose
+
+Connect the architecture to existing ecosystems.
+
+Create conceptual architecture pages for:
+
+Apple Pay
+Stripe
+PayPal
+Visa
+Mastercard
+Amazon
+OpenAI
+Anthropic
+Google
+Microsoft
+
+These are NOT product proposals.
+
+They are thought exercises showing how the Governed Payments architecture could integrate with existing platforms.
+
+Each page should answer:
+
+What changes?
+What remains unchanged?
+Where does governance live?
+What components already exist?
+What new components are required?
+
+⸻
+
+NEW SECTION
+
+Sequence Diagrams
+
+Create interactive sequence diagrams throughout the website.
+
+Required diagrams include:
+
+Simple Purchase
+Delegated Purchase
+High-Risk Purchase
+Policy Rejection
+Authority Expiration
+Manual Escalation
+
+Each sequence diagram should animate request flow between:
+
+Merchant
+AI Agent
+Governance Layer
+Wallet
+Network
+Issuer
+Customer
+
+Replay controls should allow users to step through each interaction.
+
+⸻
+
+NEW SECTION
+
+Architecture Decision Records (ADRs)
+
+Purpose
+
+Document architectural reasoning.
+
+Create an ADR library.
+
+Initial ADRs:
+
+ADR-001
+Why Policy Evaluation Occurs Before Risk Evaluation
+
+ADR-002
+Why Intent Should Be Immutable
+
+ADR-003
+Delegation Lifetime Design
+
+ADR-004
+Trust Boundary Definition
+
+ADR-005
+Audit as a First-Class Component
+
+Each ADR should contain:
+
+Context
+Problem
+Decision
+Trade-offs
+Alternatives Considered
+Consequences
+Future Work
+
+⸻
+
+UPDATE
+
+Reference Implementation
+
+The reference implementation should feel like a real payment infrastructure.
+
+Avoid simple approve/reject interactions.
+
+Instead expose the reasoning process.
+
+Example execution timeline:
+
+Evaluating delegated authority…
+Checking merchant policy…
+Validating intent…
+Running contextual risk model…
+Requesting issuer authorization…
+Recording audit trail…
+Payment approved.
+
+Users should understand every architectural decision being made.
+
+⸻
+
+NEW SECTION
+
+Architecture Glossary
+
+Purpose
+
+Create a shared vocabulary.
+
+Create a searchable glossary.
+
+Required terms include:
+
+Agent
+Authority
+Delegation
+Intent
+Intent Verification
+Policy
+Policy Engine
+Governance Layer
+Control Plane
+Risk Evaluation
+Trust Boundary
+Capability
+Payment Intent
+Audit Trail
+Decision Context
+Merchant Policy
+Liability
+Portable Policy
+
+Each term should reference related articles and architecture components.
+
+⸻
+
+NEW SECTION
+
+Version History
+
+Treat Governed Payments like an evolving architecture.
+
+Display current version on the homepage.
+
+Example
+
+Governed Payments Architecture
+Version 0.2
+Last Updated: July 2026
+
+Create release notes.
+
+Example
+
+v0.2
+* New architecture explorer
+* Reference implementation redesign
+* Interactive sequence diagrams
+* Added Industry Perspectives
+* Added Architecture Decision Records
+
+Future releases should follow semantic versioning.
+
+⸻
+
+NEW SECTION
+
+Public Roadmap
+
+Create a transparent roadmap.
+
+Structure
+
+Completed
+In Progress
+Planned
+Future Vision
+
+Example
+
+Completed
+✓ Architecture
+✓ Interactive Reference Implementation
+✓ Research Articles
+
+In Progress
+□ Whitepaper
+□ Sequence Diagrams
+□ Industry Perspectives
+
+Planned
+□ Standards Proposal
+□ Architecture SDK
+□ Community Discussions
+
+Future
+□ Open Governance Model
+
+⸻
+
+NEW PAGE
+
+Why Governed Payments Exists
+
+This becomes one of the most important pages.
+
+Purpose
+
+Explain the motivation behind the project.
+
+The page should answer:
+
+Why existing payment infrastructure was designed for humans.
+Why AI introduces fundamentally different trust assumptions.
+Why authorization alone is insufficient.
+Why orchestration alone is insufficient.
+Why governance becomes a new architectural layer.
+Why payments are the ideal proving ground.
+
+Avoid implementation details.
+
+Avoid code.
+
+Avoid UI.
+
+This page should read like an opinionated manifesto.
+
+⸻
+
+CONTENT PRINCIPLES
+
+Every page should follow this progression:
+
+Problem
+↓
+Insight
+↓
+Architecture
+↓
+Implementation
+↓
+Future Research
+
+Never begin with implementation.
+
+Never assume prior knowledge.
+
+Teach before demonstrating.
+
+⸻
+
+LONG-TERM DESIGN PRINCIPLE
+
+Governed Payments should no longer feel like:
+
+* A portfolio project
+* A prototype
+* A demo application
+
+Instead it should feel like:
+
+* An engineering research initiative
+* A living architecture repository
+* A technical documentation portal
+* An industry reference architecture
+
+Every design decision should reinforce this positioning.
+
+⸻
+
+SUCCESS METRICS
+
+After 5–10 minutes on the site, a visitor should be able to answer:
+
+* Why existing payment infrastructure is insufficient for AI agents.
+* What the Governed Payments Control Plane is.
+* How intent, delegation, policy, risk, and auditability work together.
+* How the architecture applies across multiple industries.
+* Why this work is an evolving research initiative rather than a finished product.
+
+The website should leave visitors with the impression that Governed Payments is becoming a foundational framework for AI-native commerce, not simply an interactive demo.
