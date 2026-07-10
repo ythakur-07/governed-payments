@@ -16,6 +16,181 @@ The prototype should support the architecture—not be the homepage.
 
 ⸻
 
+DESIGN PHILOSOPHY (MANDATORY)
+
+The following requirements govern every design and implementation decision. If a proposed feature conflicts with these principles, the feature should be redesigned or omitted.
+
+Primary Mission
+
+Governed Payments is not a product website.
+
+It is not a personal portfolio.
+
+It is not a SaaS landing page.
+
+It is an engineering research initiative documenting a proposed reference architecture for Agentic Commerce.
+
+Every page should reinforce this identity.
+
+⸻
+
+Decision Framework
+
+Before implementing any feature, answer the following questions.
+
+1. Does this educate?
+
+Every page should teach the visitor something new.
+
+If a section only looks visually appealing but does not improve understanding, simplify or remove it.
+
+⸻
+
+2. Does this reinforce the architecture?
+
+The architecture is the core product.
+
+Everything else supports it.
+
+Whenever possible:
+
+* replace screenshots with architecture diagrams
+* replace marketing copy with technical explanations
+* replace animations with meaningful interactions
+
+⸻
+
+3. Does this improve comprehension?
+
+Visitors should progressively understand:
+
+Problem
+↓
+Insight
+↓
+Architecture
+↓
+Implementation
+↓
+Future Research
+
+Never reverse this order.
+
+Never present implementation before explaining the problem.
+
+⸻
+
+4. Does this feel like an engineering publication?
+
+When uncertain about implementation, prefer experiences inspired by:
+
+* Stripe Documentation
+* AWS Builders Library
+* OpenAI Research
+* Anthropic Research
+* Google Engineering
+
+Avoid patterns commonly found in:
+
+* startup landing pages
+* SaaS marketing websites
+* portfolio websites
+* product showcases
+
+⸻
+
+Content Hierarchy
+
+The importance of content should always be:
+
+1. Problem
+2. Architecture
+3. Technical Reasoning
+4. Interactive Learning
+5. Reference Implementation
+
+The reference implementation should never dominate the experience.
+
+⸻
+
+Interaction Philosophy
+
+Interactions should exist to improve understanding.
+
+Good interactions include:
+
+* expanding architecture components
+* animated request flows
+* sequence diagrams
+* trust boundary visualization
+* interactive decision timelines
+
+Avoid interactions that exist only for visual appeal.
+
+⸻
+
+Simplicity Rule
+
+When choosing between two implementations:
+
+Choose the one that makes the architecture easier to understand.
+
+Not the one with more animations.
+
+Not the one with more UI.
+
+Not the one with more features.
+
+⸻
+
+Every Page Must Answer One Question
+
+Each page should have a single purpose.
+
+Examples:
+
+Home
+“What is Governed Payments?”
+
+Vision
+“Why does this problem exist?”
+
+Architecture
+“How does the system work?”
+
+Reference Implementation
+“Show me how it works.”
+
+Research
+“Teach me more.”
+
+Resources
+“Help me apply it.”
+
+If a page attempts to answer multiple questions, split it into multiple pages.
+
+⸻
+
+Success Test
+
+After implementing any page, ask:
+
+“If a Director of Engineering from Stripe spent three minutes on this page, would they leave understanding the architecture better?”
+
+If the answer is “no,” redesign the page.
+
+⸻
+
+Implementation Rule
+
+Do not optimize for visual impressiveness.
+
+Optimize for intellectual clarity.
+
+Visitors should leave remembering the ideas—not the UI.
+
+⸻
+
 Target Audience
 
 Primary:
