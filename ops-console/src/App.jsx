@@ -5,6 +5,7 @@ import SiteLayout from "./site/SiteLayout.jsx";
 import Home from "./site/Home.jsx";
 import Vision from "./site/Vision.jsx";
 import Architecture from "./site/Architecture.jsx";
+import ArchitectureExplorer from "./site/ArchitectureExplorer.jsx";
 
 // Interactive Reference Implementation (dark operator-console theme)
 import ConsoleLayout from "./components/ConsoleLayout.jsx";
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/vision" element={<Vision />} />
         <Route path="/architecture" element={<Architecture />} />
+        <Route path="/architecture/explore" element={<ArchitectureExplorer />} />
       </Route>
 
       {/* Reference Implementation console */}

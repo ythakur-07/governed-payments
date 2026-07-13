@@ -9,6 +9,7 @@ const GITHUB_URL = "https://github.com/";
 const NAV = [
   { label: "Vision", href: "/vision", route: true },
   { label: "Architecture", href: "/architecture", route: true },
+  { label: "Explorer", href: "/architecture/explore", route: true },
   { label: "Reference Implementation", href: "/#reference-implementation" },
   { label: "Research", href: "/#research" },
   { label: "About", href: "/#about" },

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiGithub } from "react-icons/fi";
-import { COMPONENTS } from "./data/architecture.js";
+import { FLOW } from "./data/architecture.js";
 
 const TOC = [
   { id: "introduction", label: "Introduction" },
@@ -22,7 +22,7 @@ const SEQUENCE = [
   { from: "Operator", to: "Payment Orchestrator", msg: "Approve the release" },
   { from: "Payment Orchestrator", to: "Wallet", msg: "Idempotent release instruction" },
   { from: "Wallet", to: "Network → Issuer", msg: "Authorize and settle" },
-  { from: "Provenance", to: "Ledger", msg: "Every step recorded, append-only" },
+  { from: "Audit Engine", to: "Ledger", msg: "Every step recorded, append-only" },
 ];
 
 const BOUNDARIES = [
@@ -35,7 +35,7 @@ const BOUNDARIES = [
   {
     zone: "Control Plane — governance boundary",
     tone: "accent",
-    members: ["Intent Engine", "Policy Engine", "Delegation Manager", "Risk Engine", "Payment Orchestrator", "Provenance"],
+    members: ["Intent Engine", "Policy Engine", "Delegation Manager", "Risk Engine", "Payment Orchestrator", "Audit Engine"],
     note: "The trusted decision layer. Authority is verified, policy is enforced deterministically, risk is scored, and every decision is recorded before any money can move.",
   },
   {
@@ -152,7 +152,7 @@ export default function Architecture() {
               style={{ backgroundColor: "var(--gp-bg-subtle)", border: "1px solid var(--gp-border)" }}
             >
               <div className="flex flex-col items-center">
-                {COMPONENTS.map((c, i) => (
+                {FLOW.map((c, i) => (
                   <div key={c.key} className="flex flex-col items-center w-full">
                     <a
                       href={`#c-${c.key}`}
@@ -174,7 +174,7 @@ export default function Architecture() {
                         </span>
                       </div>
                     </a>
-                    {i < COMPONENTS.length - 1 && (
+                    {i < FLOW.length - 1 && (
                       <div className="py-1.5 text-lg leading-none gp-flow-arrow">↓</div>
                     )}
                   </div>
@@ -184,6 +184,15 @@ export default function Architecture() {
             <p className="text-xs mt-3" style={{ color: "var(--gp-faint)" }}>
               Select any component to jump to its detail below.
             </p>
+            <div className="mt-5">
+              <Link
+                to="/architecture/explore"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-semibold no-underline"
+                style={{ color: "var(--gp-text)", border: "1px solid var(--gp-border-strong)" }}
+              >
+                Open the interactive Explorer <FiArrowRight size={16} />
+              </Link>
+            </div>
           </section>
 
           {/* Component details */}
@@ -192,7 +201,7 @@ export default function Architecture() {
               Every component, in detail
             </SectionHeading>
             <div className="space-y-5">
-              {COMPONENTS.map((c) => (
+              {FLOW.map((c) => (
                 <div
                   key={c.key}
                   id={`c-${c.key}`}
@@ -395,7 +404,7 @@ export default function Architecture() {
               Where standardization could help
             </SectionHeading>
             <div className="rounded-xl overflow-hidden" style={{ border: "1px solid var(--gp-border)" }}>
-              {COMPONENTS.filter((c) => c.governance).map((c, i) => (
+              {FLOW.filter((c) => c.governance).map((c, i) => (
                 <div
                   key={c.key}
                   className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 px-5 py-4"

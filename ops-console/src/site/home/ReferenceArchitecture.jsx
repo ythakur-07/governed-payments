@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
 import Modal from "../Modal.jsx";
-import { COMPONENTS } from "../data/architecture.js";
+import { FLOW } from "../data/architecture.js";
 
 function Node({ c, index, flowActive, onOpen }) {
   const gov = c.governance;
@@ -60,7 +60,7 @@ function Field({ label, children, mono }) {
 export default function ReferenceArchitecture() {
   const [active, setActive] = useState(null);
   const [hovering, setHovering] = useState(false);
-  const item = COMPONENTS.find((c) => c.key === active) || null;
+  const item = FLOW.find((c) => c.key === active) || null;
 
   return (
     <section
@@ -88,10 +88,10 @@ export default function ReferenceArchitecture() {
           onMouseLeave={() => setHovering(false)}
         >
           <div className="flex flex-col items-center">
-            {COMPONENTS.map((c, i) => (
+            {FLOW.map((c, i) => (
               <div key={c.key} className="flex flex-col items-center w-full">
                 <Node c={c} index={i} flowActive={hovering} onOpen={setActive} />
-                {i < COMPONENTS.length - 1 && (
+                {i < FLOW.length - 1 && (
                   <div
                     className="py-1.5 text-lg leading-none transition-colors"
                     style={{ color: hovering ? "var(--gp-accent)" : "var(--gp-faint)" }}

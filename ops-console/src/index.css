@@ -135,3 +135,34 @@ html {
   background: rgba(22, 25, 31, 0.45);
   backdrop-filter: blur(2px);
 }
+
+/* ------------------------------------------------------------------ */
+/* Architecture Explorer — animated data flows on hover                */
+/* ------------------------------------------------------------------ */
+
+/* Vertical flow (between layers): a connector pulse travelling downward */
+@keyframes gp-flow-down {
+  0%   { opacity: 0.15; transform: translateY(-4px); }
+  50%  { opacity: 1;    transform: translateY(0); }
+  100% { opacity: 0.15; transform: translateY(4px); }
+}
+.gp-flow-down { animation: gp-flow-down 1.1s ease-in-out infinite; }
+
+/* Horizontal flow (within the rails): a connector pulse travelling right */
+@keyframes gp-flow-right {
+  0%   { opacity: 0.15; transform: translateX(-4px); }
+  50%  { opacity: 1;    transform: translateX(0); }
+  100% { opacity: 0.15; transform: translateX(4px); }
+}
+.gp-flow-right { animation: gp-flow-right 1.1s ease-in-out infinite; }
+
+/* Node emphasis while its data flows are being traced */
+@keyframes gp-node-glow {
+  0%, 100% { box-shadow: 0 0 0 1px var(--gp-accent), 0 4px 14px rgba(15, 118, 110, 0.12); }
+  50%      { box-shadow: 0 0 0 2px var(--gp-accent), 0 8px 22px rgba(15, 118, 110, 0.22); }
+}
+.gp-node-glow { animation: gp-node-glow 1.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gp-flow-down, .gp-flow-right, .gp-node-glow { animation: none; }
+}
