@@ -1,10 +1,10 @@
 import { FiArrowUpRight } from "react-icons/fi";
 
 const LINKS = [
-  { label: "Portfolio", href: "#" },
-  { label: "LinkedIn", href: "#" },
-  { label: "Medium", href: "#" },
-  { label: "GitHub", href: "https://github.com/" },
+  { label: "Portfolio", href: "https://yash-thakur-product-portfolio.vercel.app/" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/yash-thakur-070790/" },
+  { label: "Medium", href: "https://medium.com/@yashhthakur" },
+  { label: "GitHub", href: "https://github.com/ythakur-07" },
 ];
 
 export default function About() {
